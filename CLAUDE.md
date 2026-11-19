@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-file IT PMO Kanban board for a fictitious bank: everything lives in `index.html` (inline `<style>`, markup, and `<script>`). There is no build, package manager, linter, or test suite. Run it by opening `index.html` directly in a browser (file://); verify changes manually in the browser.
+Two single-file static pages deployed to GitHub Pages: `index.html` is the Northbeam Software landing page (hero, three testimonials, enquiry form, designed with the `ui-ux-pro-max` skill), and `kanban/index.html` is the IT PMO Kanban board for a fictitious bank. Each has inline `<style>`, markup, and `<script>`. There is no build, package manager, linter, or test suite. Run either by opening it directly in a browser (file://); verify changes manually in the browser. Everything below the "Hard constraints" heading describes the Kanban board (`kanban/index.html`); the landing page follows the same no-storage, no-external-resources, `escapeHtml()` rules.
 
 ## Hard constraints (from the original spec)
 
