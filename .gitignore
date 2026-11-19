@@ -14,3 +14,7 @@ Thumbs.db
 # raw browser screenshots (contain tabs/bookmarks); publish cropped copies from docs/ instead
 /image.png
 /image-*.png
+
+# assessment documents (contain personal data)
+*.docx
+~$*
