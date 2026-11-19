@@ -603,6 +603,127 @@ button { cursor: pointer; }
   .modal-backdrop { padding: var(--sp-3); }
   .bang { width: 48px; height: 48px; font-size: 1.4rem; }
 }
+/* ==========================================================
+   CHAT WIDGET – cute robot avatar, bottom right
+   ========================================================== */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.toast-region { bottom: 108px; }
+
+/* ==========================================================
+   ANNOUNCEMENT DIALOG (shown once, after 10 seconds on the page)
+   ========================================================== */
+.notice-backdrop { z-index: 70; align-items: center; }
+.modal.notice { max-width: 26rem; text-align: center; padding-top: var(--sp-6); }
+.notice-icon {
+  width: 64px;
+  height: 64px;
+  margin: -64px auto var(--sp-3);
+  display: grid;
+  place-items: center;
+  background: var(--coin);
+  border: var(--bw) solid #000;
+  box-shadow: inset -5px -5px 0 #e0a800, inset 5px 5px 0 #fff0a3, 3px 3px 0 #000;
+  font-family: var(--pixel);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--ink);
+  animation: bump 500ms steps(4, end) 2;
+}
+.modal.notice h2 { font-size: 1.3rem; }
+.notice-msg { margin: var(--sp-3) 0 0; padding: var(--sp-3); background: #fff; border: var(--bw) solid #000; font-family: var(--pixel); font-size: 1.15rem; font-weight: 700; line-height: 1.4; color: var(--ink); }
+.modal.notice .form-actions { justify-content: center; border-top: none; margin-top: var(--sp-4); padding-top: 0; }
+.chat { position: fixed; right: 16px; bottom: 16px; z-index: 55; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; pointer-events: none; max-width: calc(100vw - 32px); }
+.chat > * { pointer-events: auto; }
+.chat-fab {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: var(--bw) solid #000;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff3a8, var(--coin) 60%);
+  box-shadow: var(--hard);
+  animation: bob 1.8s steps(2, end) infinite;
+  transition: transform var(--ease), box-shadow var(--ease);
+}
+.chat-fab:hover { transform: translate(-2px, -2px) scale(1.05); box-shadow: 6px 6px 0 #000; animation-play-state: paused; }
+.chat-fab:active { transform: translate(3px, 3px); box-shadow: 0 0 0 #000; }
+.chat-fab[aria-expanded="true"] { animation: none; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.avatar { width: 52px; height: 52px; display: block; shape-rendering: crispEdges; }
+.avatar .eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.5s steps(1, end) infinite; }
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 93%, 97% { transform: scaleY(0.12); } }
+.avatar-sm { width: 34px; height: 34px; }
+.chat-hello {
+  position: absolute;
+  right: 88px;
+  bottom: 20px;
+  white-space: nowrap;
+  background: #fff;
+  border: 3px solid #000;
+  box-shadow: var(--hard-sm);
+  padding: 4px 10px;
+  font-family: var(--pixel);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  pointer-events: none;
+}
+.chat-hello::after { content: ""; position: absolute; right: -9px; bottom: 8px; border: 6px solid transparent; border-left: 8px solid #000; }
+.chat-hello[hidden] { display: none; }
+.chat-panel {
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(560px, calc(100vh - 140px));
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+}
+.chat-panel[hidden] { display: none; }
+.chat-head { display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3); background: var(--st-progress); color: #fff; border-bottom: var(--bw) solid #000; }
+.chat-head .avatar { background: var(--coin); border: 2px solid #000; border-radius: 50%; padding: 2px; flex: none; }
+.chat-title { margin: 0; font-family: var(--pixel); font-size: 1rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.1; flex: 1; }
+.chat-title small { display: block; font-family: var(--sans); font-size: 0.68rem; font-weight: 400; letter-spacing: 0; text-transform: none; opacity: 0.95; }
+.chat-icon-btn { width: 38px; height: 38px; display: grid; place-items: center; background: var(--paper); color: var(--ink); border: 3px solid #000; box-shadow: 2px 2px 0 #000; padding: 0; }
+.chat-icon-btn:hover { background: var(--coin); }
+.chat-icon-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #000; }
+.chat-icon-btn[aria-pressed="false"] { background: #d9d9e6; color: #555; }
+.chat-icon-btn .icon { width: 1.15rem; height: 1.15rem; }
+.chat-log { flex: 1; overflow-y: auto; padding: var(--sp-3); display: flex; flex-direction: column; gap: var(--sp-3); min-height: 180px; background: #fffdf3; }
+.msg { max-width: 92%; padding: var(--sp-2) var(--sp-3); border: 3px solid #000; box-shadow: 2px 2px 0 #000; font-size: 0.9rem; line-height: 1.45; overflow-wrap: anywhere; }
+.msg p { margin: 0; }
+.msg p + p, .msg ul { margin-top: var(--sp-2); }
+.msg ul { margin-bottom: 0; padding-left: 1.1rem; }
+.msg li + li { margin-top: 4px; }
+.msg.bot { align-self: flex-start; background: #fff; }
+.msg.user { align-self: flex-end; background: var(--coin); font-weight: 600; }
+.msg .src { margin-top: var(--sp-2); display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 0.72rem; color: var(--text-soft); }
+.src-chip { font-family: var(--pixel); font-size: 0.7rem; font-weight: 700; background: var(--blue-soft); color: #173d9c; border: 2px solid #000; padding: 0 6px; min-height: 26px; }
+.src-chip:hover { background: var(--coin); color: var(--ink); }
+.src-tag { font-family: var(--pixel); font-size: 0.7rem; font-weight: 700; background: #e6e8ee; border: 2px solid #000; padding: 0 6px; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: var(--sp-2) var(--sp-3) 0; background: var(--paper); }
+.chip { background: #fff; border: 2px solid #000; box-shadow: 2px 2px 0 #000; font-size: 0.76rem; font-weight: 600; padding: 0 var(--sp-2); min-height: 34px; color: var(--ink); }
+.chip:hover { background: var(--coin); }
+.chip:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #000; }
+.chat-form { display: flex; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3) var(--sp-3); background: var(--paper); }
+.chat-form input { flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--sp-3); border: var(--bw) solid var(--ink); border-radius: 0; background: #fff; }
+.chat-form input:focus-visible { outline: 4px solid var(--blue); outline-offset: 0; }
+.chat-form .btn { min-height: 44px; padding: 0 var(--sp-3); }
+.chat-note { margin: 0; padding: 0 var(--sp-3) var(--sp-2); font-size: 0.68rem; color: var(--text-soft); background: var(--paper); }
+.card.flash { animation: flash 1.4s steps(2, end) 2; outline: 4px solid var(--coin); outline-offset: 2px; }
+@keyframes flash { 50% { background: #fff3a8; } }
+@media (max-width: 767px) {
+  .chat { right: 10px; bottom: 10px; }
+  .chat-fab { width: 68px; height: 68px; }
+  .toast-region { bottom: 96px; }
+  .chat-panel { max-height: calc(100vh - 120px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-fab, .avatar .eyes, .card.flash { animation: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none; animation: none; }
   .card:hover, .card.dragging { transform: none; }
@@ -723,6 +844,46 @@ button { cursor: pointer; }
   </div>
 </div>
 
+<!-- ============ ANNOUNCEMENT DIALOG (opened by setupNotice() after 10 s on the page) ============ -->
+<div class="modal-backdrop notice-backdrop" id="notice" hidden>
+  <div class="modal notice" role="alertdialog" aria-modal="true" aria-labelledby="notice-title" aria-describedby="notice-msg">
+    <div class="notice-icon" aria-hidden="true">!</div>
+    <h2 id="notice-title"></h2>
+    <p class="notice-msg" id="notice-msg"></p>
+    <div class="form-actions">
+      <button type="button" class="btn btn-primary" id="notice-ok">OK, got it</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ IT ASSISTANT CHAT WIDGET (text RAG over the live board + built-in help) ============ -->
+<div class="chat" id="chat">
+  <section class="chat-panel" id="chat-panel" role="dialog" aria-label="IT assistant chat" hidden>
+    <div class="chat-head">
+      <svg class="avatar avatar-sm" id="chat-avatar-sm" viewBox="0 0 16 16" aria-hidden="true"></svg>
+      <h2 class="chat-title">IT Assistant<small>Answers from this board and built-in help</small></h2>
+      <button type="button" class="chat-icon-btn" id="chat-voice" aria-pressed="true" aria-label="Voice replies on" title="Voice greeting on/off">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/></svg>
+      </button>
+      <button type="button" class="chat-icon-btn" id="chat-close" aria-label="Close chat">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Chat messages"></div>
+    <div class="chat-chips" id="chat-chips" aria-label="Suggested questions"></div>
+    <form class="chat-form" id="chat-form" autocomplete="off">
+      <label for="chat-input" class="sr-only">Ask the IT assistant</label>
+      <input type="text" id="chat-input" maxlength="200" placeholder="Ask about tasks or how to use the board…">
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <p class="chat-note">No AI model. Answers come from the board data and help notes in your browser; nothing is sent anywhere.</p>
+  </section>
+  <button type="button" class="chat-fab" id="chat-fab" aria-expanded="false" aria-controls="chat-panel" aria-label="Open IT assistant chat">
+    <svg class="avatar" id="chat-avatar" viewBox="0 0 16 16" aria-hidden="true"></svg>
+    <span class="chat-hello" id="chat-hello" aria-hidden="true">Hi! Need help?</span>
+  </button>
+</div>
+
 <!-- ============ TOAST REGION ============ -->
 <div class="toast-region" id="toasts" aria-live="polite" aria-atomic="false"></div>
 
@@ -740,6 +901,19 @@ button { cursor: pointer; }
   delivered after the link in that email has been clicked.
 */
 const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/YOUR_EMAIL@example.com";
+
+/*
+  SECURITY (an open-relay risk: anyone who can read this page can post to the endpoint):
+  1. Prefer FormSubmit's random "invisible email" alias over your real address in the URL above,
+     so your address is never visible in the page source (see "Invisible emails" in FormSubmit's docs).
+  2. Keep CAPTCHA on (true). FormSubmit recommends never disabling it. Only set false if you
+     confirm CAPTCHA blocks AJAX delivery for your account, and accept the spam risk.
+  3. The app also sends a hidden honeypot field, limits emails per visit (see EMAIL_LIMITS),
+     cleans the subject line, and never calls FormSubmit while the placeholder address is set.
+  4. Never commit a real address or alias to a public repo.
+*/
+const FORMSUBMIT_CAPTCHA = true;
+const EMAIL_LIMITS = { minGapMs: 15000, maxPerVisit: 10 };
 
 const STATUSES = [
   { name: "Backlog",     hint: "Logged, not yet scheduled" },
@@ -1005,15 +1179,34 @@ function showToast(message, type) {
 /* ==========================================================
    FORMSUBMIT NOTIFICATION (AJAX JSON, page never navigates)
    ========================================================== */
+const emailGuard = { last: 0, count: 0 };
+
+// Returns { sent: true } on success, or { sent: false, reason } when it deliberately did not send.
+// Throws only on a real network/server failure.
 async function notifyNewTask(task) {
+  // Never contact FormSubmit until a real endpoint is configured (no data leaves the browser by default).
+  if (FORMSUBMIT_ENDPOINT.indexOf("YOUR_EMAIL@example.com") !== -1) return { sent: false, reason: "not-configured" };
+  // Client-side brake against floods from this page (a determined attacker can bypass it; see the notes at the top).
+  const now = Date.now();
+  if (emailGuard.count >= EMAIL_LIMITS.maxPerVisit || now - emailGuard.last < EMAIL_LIMITS.minGapMs) {
+    return { sent: false, reason: "rate-limited" };
+  }
+  emailGuard.last = now;
+  emailGuard.count += 1;
   // Give up after 8 seconds so a slow network can never leave the dialog stuck on "Sending…".
   const ctrl = new AbortController();
   const timer = setTimeout(function () { ctrl.abort(); }, 8000);
   try {
-    return await sendNotification(task, ctrl.signal);
+    await sendNotification(task, ctrl.signal);
+    return { sent: true };
   } finally {
     clearTimeout(timer);
   }
+}
+
+// One-line, length-limited subject: task titles are user text and must not add line breaks.
+function cleanSubject(task) {
+  return ("[IT PMO] New task " + task.id + ": " + task.title).replace(/[\u0000-\u001f\u007f\u2028\u2029]+/g, " ").replace(/\s{2,}/g, " ").trim().slice(0, 100);
 }
 
 async function sendNotification(task, signal) {
@@ -1022,9 +1215,10 @@ async function sendNotification(task, signal) {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({
-      _subject: `[IT PMO] New task ${task.id}: ${task.title}`,
+      _subject: cleanSubject(task),
       _template: "table",
-      _captcha: "false",
+      _honey: "",                      // honeypot: FormSubmit silently drops the message if a bot fills this
+      ...(FORMSUBMIT_CAPTCHA ? {} : { _captcha: "false" }),
       "Task ID": task.id,
       Title: task.title,
       Description: task.description,
@@ -1123,7 +1317,12 @@ async function handleSubmit(event) {
   btn.disabled = true;
   btn.textContent = "Sending…";
   try {
-    await notifyNewTask(task);
+    const result = await notifyNewTask(task);
+    if (!result.sent) {
+      showToast(result.reason === "rate-limited"
+        ? "Card added. Email skipped: too many notifications; try again shortly."
+        : "Card added. Email notifications are not set up yet.", "warning");
+    }
   } catch (err) {
     // A FormSubmit failure must never break the board.
     showToast("Card added locally — email notification failed", "warning");
@@ -1515,6 +1714,327 @@ init();
   buildWorld();
   window.addEventListener("resize", layoutAll);
   window.__stage = { me: me, keys: keys, blocks: blocks, wake: wake, solids: function () { return solids; }, isPlaying: function () { return playing; } };   // for automated tests
+})();
+
+/* ==========================================================
+   IT ASSISTANT – text chatbot using retrieval-augmented answers.
+   RETRIEVE: build a corpus from the LIVE board (every task) plus
+   built-in help notes, then rank it with BM25 (synonyms + light
+   stemming). AUGMENT/GENERATE: compose the reply from the retrieved
+   facts (counts, lists, help text) and cite sources. No AI model and
+   no network calls; all text is written with textContent, never
+   innerHTML, so task titles cannot inject markup.
+   Clicking the avatar speaks a greeting with the browser's
+   built-in speech synthesis (and shows it as text too).
+   ========================================================== */
+(function setupChat() {
+  const GREETING = "I am your IT assistant, how can I help you?";
+  const fab = document.getElementById("chat-fab");
+  const panel = document.getElementById("chat-panel");
+  const log = document.getElementById("chat-log");
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("chat-input");
+  const closeBtn = document.getElementById("chat-close");
+  const voiceBtn = document.getElementById("chat-voice");
+  const chipsEl = document.getElementById("chat-chips");
+  const hello = document.getElementById("chat-hello");
+  let voiceOn = true, started = false;
+
+  // ---- cute pixel avatar (original art, 16x16) ---------------------------
+  const AV_PAL = { K: "#14142b", L: "#7dd3fc", M: "#38bdf8", W: "#fff8e1", E: "#14142b", P: "#ff8fab", Y: "#ffd23f", R: "#d62839" };
+  const AV = [
+    ".......YY.......", "......YYYY......", ".......KK.......", "...KKKKKKKKKK...",
+    "..KLLLLLLLLLLK..", "..KLWWWWWWWWLK..", "..KLWEEWWEEWLK..", "..KLWEEWWEEWLK..",
+    "..KLWPWWWWPWLK..", "..KLWWWRRWWWLK..", "..KLLLLLLLLLLK..", "...KKKKKKKKKK...",
+    ".....KMMMMK.....", "..KKKMMMMMMKKK..", "...KMMMMMMMMK...", "....KKKKKKKK...."
+  ];
+  function avatarMarkup() {
+    let body = "", eyes = "";
+    AV.forEach(function (row, y) {
+      for (let x = 0; x < row.length; x++) {
+        const c = row.charAt(x);
+        if (c === ".") continue;
+        const r = '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + AV_PAL[c] + '"/>';
+        if (c === "E") eyes += r; else body += r;
+      }
+    });
+    return body + '<g class="eyes">' + eyes + "</g>";
+  }
+  document.getElementById("chat-avatar").innerHTML = avatarMarkup();
+  document.getElementById("chat-avatar-sm").innerHTML = avatarMarkup();
+
+  // ---- voice (Web Speech API, built into the browser) --------------------
+  function speechEngine() { return window.speechSynthesis && typeof window.speechSynthesis.speak === "function" ? window.speechSynthesis : null; }
+  function stopSpeech() { try { const s = speechEngine(); if (s) s.cancel(); } catch (e) { /* ignore */ } }
+  function speak(text) {
+    if (!voiceOn || !speechEngine() || typeof SpeechSynthesisUtterance === "undefined") return;
+    try {
+      const synth = speechEngine();
+      synth.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US"; u.rate = 1; u.pitch = 1.15;
+      const voices = synth.getVoices ? synth.getVoices() : [];
+      const pick = voices.find(function (v) { return /^en/i.test(v.lang) && /female|zira|samantha|aria|jenny|google us/i.test(v.name); }) ||
+                   voices.find(function (v) { return /^en/i.test(v.lang); });
+      if (pick) u.voice = pick;
+      synth.speak(u);
+    } catch (e) { /* speech is a bonus; never break the app */ }
+  }
+  voiceBtn.addEventListener("click", function () {
+    voiceOn = !voiceOn;
+    voiceBtn.setAttribute("aria-pressed", String(voiceOn));
+    voiceBtn.setAttribute("aria-label", voiceOn ? "Voice replies on" : "Voice replies off");
+    if (!voiceOn) stopSpeech();
+  });
+
+  // ---- message rendering (textContent only) ------------------------------
+  function el(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function say(role, parts) {
+    const m = el("div", "msg " + role);
+    (parts.paragraphs || []).forEach(function (t) { m.appendChild(el("p", "", t)); });
+    if (parts.lines && parts.lines.length) {
+      const ul = el("ul");
+      parts.lines.forEach(function (t) { ul.appendChild(el("li", "", t)); });
+      m.appendChild(ul);
+    }
+    if (parts.sources && parts.sources.length) {
+      const s = el("div", "src");
+      s.appendChild(el("span", "", "Sources:"));
+      parts.sources.forEach(function (src) {
+        if (src.task) {
+          const b = el("button", "src-chip", src.id);
+          b.type = "button";
+          b.setAttribute("aria-label", "Show task " + src.id + " on the board");
+          b.addEventListener("click", function () { showTask(src.id); });
+          s.appendChild(b);
+        } else s.appendChild(el("span", "src-tag", src.id));
+      });
+      m.appendChild(s);
+    }
+    log.appendChild(m);
+    while (log.children.length > 40) log.removeChild(log.firstChild);
+    log.scrollTop = log.scrollHeight;
+  }
+  function showTask(id) {
+    const card = document.querySelector('.card[data-id="' + id.replace(/[^A-Za-z0-9-]/g, "") + '"]');
+    if (!card) { say("bot", { paragraphs: [id + " is hidden by a filter. Press Clear filters to see it."] }); return; }
+    card.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+    setTimeout(function () { card.classList.remove("flash"); }, 3000);
+  }
+
+  // ---- RETRIEVE: corpus + BM25 -------------------------------------------
+  const HELP = [
+    { id: "Help: Add a task", title: "How to add a task", kw: "create new add task form",
+      text: "Press Add Task at the top right (or bump a ! block from below on the game stage). Fill in the title, assignee and due date, then press Add Task. The card appears straight away in the column you chose." },
+    { id: "Help: Move a task", title: "How to move a task", kw: "move drag drop column change status keyboard",
+      text: "Drag a card onto another column, or press the Move button on the card and pick a column. The Move button works with the keyboard too." },
+    { id: "Help: Delete a task", title: "How to delete a task", kw: "delete remove erase cancel",
+      text: "Press the X on a card, then confirm with Yes. Press No to keep it." },
+    { id: "Help: Filters", title: "Filtering the board", kw: "filter search find project assignee priority clear",
+      text: "Use the Project, Assignee contains and Priority filters above the board. Press Clear filters to see everything again." },
+    { id: "Help: Columns", title: "What the columns mean", kw: "column status backlog progress blocked done meaning",
+      text: "Backlog: logged, not yet scheduled. In Progress: actively being worked. Blocked: waiting on a dependency, vendor or approval. Done: completed or closed." },
+    { id: "Help: Priority", title: "Priority levels", kw: "priority critical high medium low urgent shape colour",
+      text: "Priority shows as a coloured edge and a label with a shape: critical (double triangle), high (triangle), medium (diamond), low (down triangle)." },
+    { id: "Help: Overdue", title: "What overdue means", kw: "overdue late past due date deadline red badge",
+      text: "A task that is not Done and whose due date has passed gets a red Overdue badge. Overdue tasks are counted in the red Overdue tile at the top." },
+    { id: "Help: Game", title: "How to play the game stage", kw: "play game stage mario walk jump sprint keyboard keys controls bricks blocks run",
+      text: "Press Play on the stage. Use the arrow keys or A and D to walk, Space to jump (hold for higher), Shift to sprint, and Esc to stop. Bricks are solid. Bump a ! block from below to add a task to that column." },
+    { id: "Help: Demo data", title: "Is my data saved?", kw: "save saved persist memory refresh reset data lost storage",
+      text: "No. This is a demo: the board lives in memory and resets to the sample data whenever you refresh the page." },
+    { id: "Help: Email", title: "Email notifications", kw: "email notify notification formsubmit mail",
+      text: "When an email address is configured, new tasks are also sent by email through FormSubmit. If that is not set up, you will see a warning but the card is still added to the board." },
+    { id: "Help: Voice", title: "Voice greeting", kw: "voice speak speech sound audio mute greeting",
+      text: "Click my avatar to hear a greeting. The speaker button in the chat header turns the voice on or off." },
+    { id: "Help: About me", title: "About the IT assistant", kw: "who you assistant bot ai model about hello help",
+      text: "I answer from the live board and my built-in help notes. I am not an AI model and nothing you type leaves your browser." }
+  ];
+  const STOP = new Set(["the", "a", "an", "is", "are", "was", "of", "to", "in", "on", "for", "and", "or", "what", "which", "who", "whom", "how", "do", "does", "did", "i", "me", "my", "you", "your", "can", "could", "show", "tell", "list", "please", "about", "with", "it", "this", "that", "there", "any", "all", "at", "be", "by", "from", "as", "get", "give", "need", "want", "have", "has", "up"]);
+  const SYN = { stuck: "blocked", waiting: "blocked", dependency: "blocked", blocker: "blocked", finished: "done", completed: "done", complete: "done", closed: "done", urgent: "critical", late: "overdue", delayed: "overdue", pastdue: "overdue", todo: "backlog", unscheduled: "backlog", started: "progress", ongoing: "progress", wip: "progress", doing: "progress", create: "add", new: "add", erase: "delete", remove: "delete", shift: "move", drag: "move", keys: "keyboard", controls: "keyboard", walk: "play", jump: "play", mario: "play", game: "play", staff: "assignee", owner: "assignee", person: "assignee", deadline: "due", mail: "email", speak: "voice", sound: "voice" };
+  function stem(w) { return w.length > 4 ? w.replace(/(ing|ed|es|s)$/, "") : w; }
+  function tokens(s) {
+    const raw = String(s).toLowerCase().match(/[a-z0-9]+/g) || [];
+    return raw.filter(function (w) { return !STOP.has(w); }).map(function (w) { return stem(SYN[w] || w); });
+  }
+  function taskBody(t) {
+    return [t.id, t.title, t.description, t.project, t.category, t.assignee, t.priority, t.status, "due " + t.dueDate, isOverdue(t) ? "overdue late" : ""].join(" ");
+  }
+  function corpus() {
+    const docs = HELP.map(function (h) { return { kind: "help", id: h.id, help: h, body: h.title + " " + h.kw + " " + h.text }; });
+    state.tasks.forEach(function (t) { docs.push({ kind: "task", id: t.id, task: t, body: taskBody(t) }); });
+    return docs;
+  }
+  function retrieve(query, k) {
+    const docs = corpus();
+    const q = Array.from(new Set(tokens(query)));
+    if (!q.length) return [];
+    const lens = [], tfs = [];
+    docs.forEach(function (d) {
+      const tk = tokens(d.body), tf = {};
+      tk.forEach(function (w) { tf[w] = (tf[w] || 0) + 1; });
+      tfs.push(tf); lens.push(tk.length);
+    });
+    const avg = lens.reduce(function (a, b) { return a + b; }, 0) / docs.length || 1;
+    const N = docs.length, k1 = 1.4, b = 0.75;
+    const scored = docs.map(function (d, i) {
+      let s = 0;
+      q.forEach(function (w) {
+        const n = tfs.filter(function (tf) { return tf[w]; }).length;
+        if (!n) return;
+        const idf = Math.log(1 + (N - n + 0.5) / (n + 0.5));
+        const f = tfs[i][w] || 0;
+        s += idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * lens[i] / avg));
+      });
+      return { doc: d, score: s };
+    }).filter(function (r) { return r.score > 0; }).sort(function (a, c) { return c.score - a.score; });
+    if (!scored.length) return [];
+    const cut = Math.max(0.6, scored[0].score * 0.5);
+    return scored.filter(function (r) { return r.score >= cut; }).slice(0, k);
+  }
+
+  // ---- AUGMENT + GENERATE -------------------------------------------------
+  function line(t) {
+    return t.id + ": " + t.title + " (" + t.priority + ", " + t.status + ", due " + formatDate(t.dueDate) + ", " + t.assignee + (isOverdue(t) ? ", OVERDUE" : "") + ")";
+  }
+  function taskAnswer(list, intro) {
+    if (!list.length) return { paragraphs: [intro.none || "I found no matching tasks."] };
+    const shown = list.slice(0, 8);
+    const out = { paragraphs: [intro.some.replace("{n}", String(list.length))], lines: shown.map(line), sources: shown.map(function (t) { return { id: t.id, task: true }; }) };
+    if (list.length > shown.length) out.paragraphs.push("Showing the first " + shown.length + ".");
+    return out;
+  }
+  const STATUS_RX = [["Backlog", /\bbacklog\b|\bto ?do\b|\bunscheduled\b/], ["In Progress", /\bin progress\b|\bprogress\b|\bongoing\b|\bwip\b|\bstarted\b/], ["Blocked", /\bblocked\b|\bstuck\b|\bblockers?\b/], ["Done", /\bdone\b|\bcompleted?\b|\bfinished\b|\bclosed\b/]];
+  const PRIO_RX = [["Critical", /\bcritical\b|\burgent\b/], ["High", /\bhigh\b/], ["Medium", /\bmedium\b/], ["Low", /\blow\b/]];
+
+  function answer(query) {
+    const q = query.toLowerCase();
+    const tasks = state.tasks;
+    const idm = query.match(/uob-itpm-\d{4}/i);
+    if (idm) {
+      const t = tasks.find(function (x) { return x.id.toLowerCase() === idm[0].toLowerCase(); });
+      return t ? { paragraphs: ["Here is what I have on " + t.id + ":"], lines: [line(t), "Project: " + t.project + " | Category: " + t.category], sources: [{ id: t.id, task: true }] }
+               : { paragraphs: ["I cannot find " + idm[0].toUpperCase() + " on the board."] };
+    }
+    if (/^\s*(hi|hello|hey|yo|good (morning|afternoon|evening))\b/.test(q) || /^\s*help\s*[?!.]*\s*$/.test(q)) {
+      return { paragraphs: [GREETING, "Ask about tasks (for example overdue or blocked ones), people, or how to use the board."] };
+    }
+    const status = (STATUS_RX.find(function (s) { return s[1].test(q); }) || [])[0];
+    const prio = (PRIO_RX.find(function (s) { return s[1].test(q); }) || [])[0];
+    const wantsOverdue = /\boverdue\b|\blate\b|\bpast due\b|\bdelayed\b/.test(q);
+    const person = (function () {
+      const names = Array.from(new Set(tasks.map(function (t) { return t.assignee; })));
+      return names.find(function (n) { return n.toLowerCase().split(/\s+/).some(function (p) { return p.length >= 3 && new RegExp("\\b" + p.replace(/[^a-z0-9]/g, "") + "\\b").test(q); }); });
+    })();
+    const isCount = /\bhow many\b|\bcount\b|\bnumber of\b|\btotal\b/.test(q);
+    const asksHow = /\bhow (do|can|to)\b|\bhow does\b/.test(q);
+
+    if (!asksHow && (isCount || wantsOverdue || status || prio || person)) {
+      let list = tasks.slice();
+      const bits = [];
+      if (wantsOverdue) { list = list.filter(isOverdue); bits.push("overdue"); }
+      if (status) { list = list.filter(function (t) { return t.status === status; }); bits.push("in " + status); }
+      if (prio) { list = list.filter(function (t) { return t.priority === prio; }); bits.push(prio + " priority"); }
+      if (person) { list = list.filter(function (t) { return t.assignee === person; }); bits.push("assigned to " + person); }
+      const what = bits.length ? bits.join(", ") : "on the board";
+      if (isCount) {
+        const out = taskAnswer(list, { some: "There " + (list.length === 1 ? "is" : "are") + " {n} task" + (list.length === 1 ? "" : "s") + " " + what + ".", none: "There are 0 tasks " + what + "." });
+        if (!list.length) out.paragraphs = ["There are 0 tasks " + what + "."];
+        return out;
+      }
+      const out = taskAnswer(list, { some: "{n} task" + (list.length === 1 ? "" : "s") + " " + what + ":", none: "I found no tasks " + what + "." });
+      if (wantsOverdue && list.length) out.paragraphs.push("Overdue means not Done and past the due date.");
+      return out;
+    }
+
+    const hits = retrieve(query, 3);
+    if (!hits.length) {
+      return { paragraphs: ["I could not find that on the board or in my help notes.", "Try asking about overdue or blocked tasks, a person's tasks, a task ID like UOB-ITPM-0003, or how to add, move, filter or play."] };
+    }
+    const helpHits = hits.filter(function (h) { return h.doc.kind === "help"; });
+    const taskHits = hits.filter(function (h) { return h.doc.kind === "task"; });
+    if (helpHits.length && (!taskHits.length || helpHits[0].score >= taskHits[0].score)) {
+      const h = helpHits[0].doc.help;
+      const out = { paragraphs: [h.text], sources: [{ id: h.id, task: false }] };
+      if (taskHits.length) { out.lines = taskHits.slice(0, 2).map(function (r) { return line(r.doc.task); }); out.sources = out.sources.concat(taskHits.slice(0, 2).map(function (r) { return { id: r.doc.id, task: true }; })); }
+      return out;
+    }
+    return taskAnswer(taskHits.map(function (r) { return r.doc.task; }), { some: "Here " + (taskHits.length === 1 ? "is the closest match" : "are the closest {n} matches") + " on the board:" });
+  }
+
+  // ---- UI wiring -----------------------------------------------------------
+  const SUGGEST = ["What is overdue?", "How many tasks are blocked?", "Show critical tasks", "How do I add a task?", "How do I play?"];
+  SUGGEST.forEach(function (s) {
+    const b = el("button", "chip", s);
+    b.type = "button";
+    b.addEventListener("click", function () { ask(s); });
+    chipsEl.appendChild(b);
+  });
+  function ask(text) {
+    const t = text.trim().slice(0, 200);
+    if (!t) return;
+    say("user", { paragraphs: [t] });
+    let reply;
+    try { reply = answer(t); } catch (e) { reply = { paragraphs: ["Sorry, I could not work that out. Try rephrasing."] }; }
+    setTimeout(function () { say("bot", reply); }, 120);
+  }
+  form.addEventListener("submit", function (e) { e.preventDefault(); const v = input.value; input.value = ""; ask(v); input.focus(); });
+
+  function openChat() {
+    panel.hidden = false;
+    fab.setAttribute("aria-expanded", "true");
+    fab.setAttribute("aria-label", "Close IT assistant chat");
+    hello.hidden = true;
+    if (!started) { started = true; say("bot", { paragraphs: [GREETING] }); }
+    speak(GREETING);                       // the voice message on click
+    input.focus();
+  }
+  function closeChat() {
+    panel.hidden = true;
+    fab.setAttribute("aria-expanded", "false");
+    fab.setAttribute("aria-label", "Open IT assistant chat");
+    stopSpeech();
+    fab.focus();
+  }
+  fab.addEventListener("click", function () { if (panel.hidden) openChat(); else closeChat(); });
+  closeBtn.addEventListener("click", closeChat);
+  panel.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.stopPropagation(); closeChat(); } });
+  setTimeout(function () { hello.hidden = true; }, 9000);
+  try { const s = speechEngine(); if (s && s.getVoices) s.getVoices(); } catch (e) { /* warm up the voice list; optional */ }
+})();
+
+/* ==========================================================
+   ANNOUNCEMENT – after the visitor has spent 10 seconds on the
+   page (time only counts while the tab is visible), show a dialog
+   once per visit. Built as an accessible alertdialog instead of
+   the browser's built-in alert box (this project forbids those). Nothing is
+   stored; a refresh is a new visit. It waits politely if the Add
+   Task dialog is open, and gives focus back when dismissed.
+   ========================================================== */
+(function setupNotice() {
+  const NOTICE = { afterMs: 10000, title: "IT announcement", message: "IT meeting next Wed 10am at room 888" };
+  const box = document.getElementById("notice");
+  const ok = document.getElementById("notice-ok");
+  document.getElementById("notice-title").textContent = NOTICE.title;
+  document.getElementById("notice-msg").textContent = NOTICE.message;
+  let visibleMs = 0, previous = null;
+
+  function addTaskDialogOpen() { const m = document.getElementById("modal"); return !!m && !m.hidden; }
+  function show() { previous = document.activeElement; box.hidden = false; ok.focus(); }
+  function hide() { box.hidden = true; if (previous && previous.focus) previous.focus(); }
+
+  const timer = setInterval(function () {
+    if (document.hidden) return;                       // only visible time counts
+    visibleMs += 500;
+    if (visibleMs >= NOTICE.afterMs && !addTaskDialogOpen()) { clearInterval(timer); show(); }
+  }, 500);
+
+  ok.addEventListener("click", hide);
+  box.addEventListener("mousedown", function (e) { if (e.target === box) hide(); });
+  box.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { e.stopPropagation(); hide(); }
+    else if (e.key === "Tab") { e.preventDefault(); ok.focus(); }   // single control: keep focus inside the dialog
+  });
 })();
 </script>
 </body>
