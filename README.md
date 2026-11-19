@@ -30,6 +30,12 @@ To receive new-task emails, set `FORMSUBMIT_ENDPOINT` near the top of the `<scri
 - Vanilla HTML, CSS and JavaScript, with no dependencies or external resources.
 - Fictitious demo: not an official system of any organisation.
 
-## Screenshot
+## Screenshots
+
+### Landing page (`/site/`)
+
+![Northbeam Software landing page showing the hero section, three client testimonial cards and the enquiry form](docs/site-screenshot.png)
+
+### Kanban board
 
 ![IT PMO Kanban board showing the summary strip, filters and the Backlog, In Progress, Blocked and Done columns](docs/screenshot.png)
