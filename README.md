@@ -4,6 +4,8 @@ A single-page Kanban board for a fictitious bank's internal IT PMO. Track IT pro
 
 **Live demo:** https://nsarno38.github.io/claudecodetraining/
 
+**Also included:** a fictitious software-company landing page (hero, three testimonials, enquiry form) at https://nsarno38.github.io/claudecodetraining/site/ (source in `site/index.html`).
+
 ## Features
 
 - Four columns with live count badges and a summary strip (side by side on desktop, stacked below 768px)

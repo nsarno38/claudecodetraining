@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northbeam Software – Custom software, delivered</title>
+<meta name="description" content="Northbeam Software builds web and mobile applications for growing companies. Fictitious demo site.">
+<style>
+  :root {
+    --navy: #0b2545;
+    --blue: #1d5fd1;
+    --blue-dark: #174aa5;
+    --sky: #e8f0fd;
+    --ink: #1c2733;
+    --muted: #5a6877;
+    --line: #d9e0ea;
+    --bg: #f6f8fb;
+    --white: #fff;
+    --err: #b42318;
+    --ok: #146c43;
+    --radius: 12px;
+    --shadow: 0 2px 10px rgba(11, 37, 69, .08);
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.55; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid #f5b301; outline-offset: 2px; }
+  .wrap { width: min(1100px, 100% - 2rem); margin-inline: auto; }
+
+  /* NAV */
+  .nav { background: var(--navy); color: var(--white); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .9rem; flex-wrap: wrap; }
+  .brand { font-weight: 800; font-size: 1.25rem; letter-spacing: .02em; text-decoration: none; }
+  .brand span { color: #7fb0ff; }
+  .nav ul { list-style: none; display: flex; gap: 1.25rem; margin: 0; padding: 0; flex-wrap: wrap; }
+  .nav a { text-decoration: none; opacity: .9; }
+  .nav a:hover { opacity: 1; text-decoration: underline; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--navy) 0%, #12407f 60%, var(--blue) 100%); color: var(--white); padding-block: clamp(3rem, 8vw, 6rem); }
+  .hero .wrap { display: grid; gap: 2.5rem; grid-template-columns: 1.2fr 1fr; align-items: center; }
+  .eyebrow { display: inline-block; background: rgba(255,255,255,.14); padding: .3rem .8rem; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.12; margin: 1rem 0; }
+  .hero p { font-size: 1.1rem; max-width: 36rem; opacity: .92; margin: 0 0 1.75rem; }
+  .btn { display: inline-block; border: 0; border-radius: 8px; padding: .8rem 1.5rem; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; }
+  .btn-primary { background: #f5b301; color: #1a1300; }
+  .btn-primary:hover { background: #ffc629; }
+  .btn-ghost { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); margin-left: .5rem; }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); padding: 1.25rem; }
+  .stat b { display: block; font-size: 2rem; line-height: 1.1; }
+  .stat span { font-size: .9rem; opacity: .85; }
+
+  /* SECTIONS */
+  section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin: 0 0 .5rem; color: var(--navy); }
+  .lead { color: var(--muted); max-width: 40rem; margin: 0 0 2rem; }
+
+  /* TESTIMONIALS */
+  .cards { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; display: flex; flex-direction: column; margin: 0; }
+  .stars { color: #f5a300; letter-spacing: .15em; font-size: 1.05rem; }
+  .card blockquote { margin: .75rem 0 1.25rem; flex: 1; }
+  .who { display: flex; align-items: center; gap: .75rem; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--sky); color: var(--blue-dark); display: grid; place-items: center; font-weight: 800; flex: none; }
+  .who strong { display: block; }
+  .who small { color: var(--muted); }
+
+  /* FORM */
+  .enquiry { background: var(--sky); }
+  .form-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(1.25rem, 3vw, 2rem); max-width: 720px; }
+  .grid2 { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+  .field { margin-bottom: 1rem; }
+  label { display: block; font-weight: 600; margin-bottom: .3rem; }
+  input, select, textarea { width: 100%; font: inherit; padding: .65rem .75rem; border: 1px solid #aab6c5; border-radius: 8px; background: var(--white); color: var(--ink); }
+  textarea { min-height: 130px; resize: vertical; }
+  input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--err); }
+  .err { color: var(--err); font-size: .875rem; margin: .3rem 0 0; min-height: 1.1em; }
+  .hint { color: var(--muted); font-size: .85rem; }
+  .form-card .btn-primary { background: var(--blue); color: var(--white); }
+  .form-card .btn-primary:hover { background: var(--blue-dark); }
+  .form-card .btn-primary:disabled { opacity: .65; cursor: wait; }
+  .status { margin-top: 1rem; padding: .8rem 1rem; border-radius: 8px; }
+  .status.ok { background: #e6f4ec; color: var(--ok); }
+  .status.warn { background: #fff4d6; color: #7a5200; }
+
+  footer { background: var(--navy); color: #c9d6ea; padding-block: 1.5rem; font-size: .9rem; }
+
+  @media (max-width: 860px) {
+    .hero .wrap, .cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .grid2 { grid-template-columns: 1fr; }
+    .btn-ghost { margin-left: 0; margin-top: .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!--
+  ENQUIRY EMAIL (optional): replace YOUR_EMAIL@example.com with your address.
+  FormSubmit sends a one-time activation email on first use; enquiries only
+  arrive after you click the link in it. Do NOT commit a real address to a
+  public repo. Until it is set up, the form still works and shows a notice.
+-->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Northbeam<span>Software</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#enquiry">Enquire</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Web &amp; mobile engineering</span>
+        <h1 id="hero-title">Custom software, delivered on time.</h1>
+        <p>We design, build and launch the web and mobile applications your customers actually use, with small senior teams and a working release every two weeks.</p>
+        <a class="btn btn-primary" href="#enquiry">Get a free quote</a>
+        <a class="btn btn-ghost" href="#testimonials">See what clients say</a>
+      </div>
+      <div class="stats" aria-label="Highlights">
+        <div class="stat"><b>120+</b><span>projects shipped</span></div>
+        <div class="stat"><b>98%</b><span>on-time delivery</span></div>
+        <div class="stat"><b>2 wks</b><span>to first release</span></div>
+        <div class="stat"><b>4.9/5</b><span>average client rating</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" aria-labelledby="t-title">
+    <div class="wrap">
+      <h2 id="t-title">What our clients say</h2>
+      <p class="lead">Sample testimonials for this fictitious demo company.</p>
+      <div class="cards">
+        <figure class="card">
+          <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“They rebuilt our customer portal in six weeks. Support tickets dropped by a third and the team was a pleasure to work with.”</blockquote>
+          <figcaption class="who"><span class="avatar" aria-hidden="true">AT</span><span><strong>Amelia Tan</strong><small>COO, Harbourline Logistics</small></span></figcaption>
+        </figure>
+        <figure class="card">
+          <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Clear estimates, no surprises, and a release every fortnight. It is the first agency that hit every milestone we agreed.”</blockquote>
+          <figcaption class="who"><span class="avatar" aria-hidden="true">RK</span><span><strong>Rahul Kapoor</strong><small>Founder, Fernwood Retail</small></span></figcaption>
+        </figure>
+        <figure class="card">
+          <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Our mobile app launched with a 4.8 store rating. They handled security reviews and handover documentation brilliantly.”</blockquote>
+          <figcaption class="who"><span class="avatar" aria-hidden="true">SL</span><span><strong>Sarah Lim</strong><small>Head of Digital, Crestview Insurance</small></span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="enquiry" class="enquiry" aria-labelledby="e-title">
+    <div class="wrap">
+      <h2 id="e-title">Start a project enquiry</h2>
+      <p class="lead">Tell us what you need and we will reply within one working day.</p>
+      <div class="form-card">
+        <form id="enquiry-form" novalidate>
+          <div class="grid2">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" maxlength="80" aria-describedby="name-err" required>
+              <p class="err" id="name-err"></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="120" aria-describedby="email-err" required>
+              <p class="err" id="email-err"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="service">What do you need?</label>
+            <select id="service" name="service" aria-describedby="service-err" required>
+              <option value="">Select a service…</option>
+              <option>Website or web app</option>
+              <option>Mobile app</option>
+              <option>API &amp; integrations</option>
+              <option>Cloud &amp; DevOps</option>
+              <option>Not sure yet</option>
+            </select>
+            <p class="err" id="service-err"></p>
+          </div>
+          <div class="field">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" maxlength="1000" aria-describedby="message-err message-hint" required></textarea>
+            <p class="hint" id="message-hint">Up to 1000 characters. Please don't include sensitive information.</p>
+            <p class="err" id="message-err"></p>
+          </div>
+          <button class="btn btn-primary" type="submit" id="submit-btn">Send enquiry</button>
+          <div id="form-status" class="status" role="status" aria-live="polite" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">Northbeam Software is a fictitious company created for a training demo. Testimonials are sample text.</div>
+</footer>
+
+<script>
+  // ENQUIRY ENDPOINT – set your own address here (see comment at top of <body>).
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/YOUR_EMAIL@example.com";
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  const form = document.getElementById("enquiry-form");
+  const statusBox = document.getElementById("form-status");
+  const submitBtn = document.getElementById("submit-btn");
+  const fields = ["name", "email", "service", "message"];
+
+  function setError(id, msg) {
+    const el = document.getElementById(id);
+    document.getElementById(id + "-err").textContent = msg;
+    if (msg) { el.setAttribute("aria-invalid", "true"); } else { el.removeAttribute("aria-invalid"); }
+  }
+
+  function validate() {
+    const v = {};
+    fields.forEach(function (f) { v[f] = form.elements[f].value.trim(); });
+    const errors = {};
+    if (!v.name) errors.name = "Please enter your name.";
+    if (!v.email) errors.email = "Please enter your email address.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)) errors.email = "Please enter a valid email address.";
+    if (!v.service) errors.service = "Please choose a service.";
+    if (!v.message) errors.message = "Please describe your project.";
+    else if (v.message.length < 10) errors.message = "Please add a little more detail (at least 10 characters).";
+    fields.forEach(function (f) { setError(f, errors[f] || ""); });
+    const first = fields.find(function (f) { return errors[f]; });
+    return { values: v, valid: !first, firstInvalid: first };
+  }
+
+  function showStatus(kind, html) {
+    statusBox.className = "status " + kind;
+    statusBox.innerHTML = html;
+    statusBox.hidden = false;
+  }
+
+  async function sendEnquiry(v) {
+    const res = await fetch(FORMSUBMIT_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: "New website enquiry from " + v.name,
+        name: v.name, email: v.email, service: v.service, message: v.message
+      })
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const result = validate();
+    if (!result.valid) { form.elements[result.firstInvalid].focus(); return; }
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+    statusBox.hidden = true;
+    try {
+      await sendEnquiry(result.values);
+      showStatus("ok", "Thank you, <strong>" + escapeHtml(result.values.name) + "</strong>. We have received your enquiry and will reply within one working day.");
+      form.reset();
+    } catch (err) {
+      showStatus("warn", "Your enquiry could not be sent right now. This demo form is not connected to a live inbox yet.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send enquiry";
+    }
+  });
+
+  fields.forEach(function (f) {
+    form.elements[f].addEventListener("input", function () { setError(f, ""); });
+  });
+</script>
+</body>
+</html>
