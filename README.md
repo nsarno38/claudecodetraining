@@ -27,3 +27,7 @@ To receive new-task emails, set `FORMSUBMIT_ENDPOINT` near the top of the `<scri
 - Demo data only. The board is not persistent and resets to seed data on every refresh (no localStorage, cookies or backend).
 - Vanilla HTML, CSS and JavaScript, with no dependencies or external resources.
 - Fictitious demo: not an official system of any organisation.
+
+## Screenshot
+
+![IT PMO Kanban board showing the summary strip, filters and the Backlog, In Progress, Blocked and Done columns](docs/screenshot.png)

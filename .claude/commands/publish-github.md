@@ -25,6 +25,12 @@ Never push until this passes. Search every file that would be committed (and git
 ## 2. README
 Create or update `README.md` from the actual project (read the code; do not invent features): title, one-line description, features, how to run locally, configuration (any constants the user must change), tech stack, live-demo link (filled in at step 6), and license note if one exists. If a README already exists, edit it rather than replacing user-written content.
 
+## 2a. Screenshot in the README
+- Take a screenshot of the running site and embed it in the README under a "Screenshot" heading. Use the Playwright MCP tools (`browser_navigate`, then `browser_take_screenshot`) on the live Pages URL if it already returns 200, otherwise on the local `index.html` (`file:///...`). If the Playwright tools are not available in the session, say so and ask the user to supply the image; never fake or reuse an unrelated image.
+- Save it as `docs/screenshot.png` (create `docs/`), embed with `![<meaningful alt text>](docs/screenshot.png)`, and remove any placeholder image links such as `![alt text](image-1.png)` that point to files that do not exist.
+- Look at the image before committing: it must show what the README claims, and must not contain personal data (names, NRIC, emails, browser bookmarks or tabs). Crop to the page content, not the browser window.
+- Re-take the screenshot after later UI changes, and stage the image with the commit in step 3.
+
 ## 3. Commit and push
 - `git init` if needed; set `main` as the branch; add `origin` (fix it if it points elsewhere).
 - Stage files explicitly (not blindly `git add .`), review `git status`, commit with a clear message, `git push -u origin main`.

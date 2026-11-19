@@ -10,3 +10,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+
+# raw browser screenshots (contain tabs/bookmarks); publish cropped copies from docs/ instead
+/image.png
+/image-*.png
