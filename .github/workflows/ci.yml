@@ -14,29 +14,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Pages exist
-        run: test -f index.html && test -f kanban/index.html
+      - name: index.html exists
+        run: test -f index.html
 
       - name: No browser storage APIs
         run: |
-          if grep -nE 'localStorage|sessionStorage|indexedDB|document\.cookie' index.html kanban/index.html; then
+          if grep -nE 'localStorage|sessionStorage|indexedDB|document\.cookie' index.html; then
             echo "Storage APIs are not allowed"; exit 1
           fi
 
       - name: No !important
         run: |
-          if grep -n '!important' index.html kanban/index.html; then
+          if grep -n '!important' index.html; then
             echo "!important is not allowed"; exit 1
           fi
 
       - name: Only the FormSubmit URL is referenced
         run: |
-          if cat index.html kanban/index.html | grep -oE 'https?://[^"'"'"' )<>`]+' | grep -v '^https://formsubmit.co/ajax/'; then
+          if grep -oE 'https?://[^"'"'"' )<>`]+' index.html | grep -v '^https://formsubmit.co/ajax/'; then
             echo "Unexpected external URL"; exit 1
           fi
 
       - name: No real email in the endpoint
         run: |
-          for f in index.html kanban/index.html; do
-            grep -q 'YOUR_EMAIL@example.com' "$f" || { echo "$f: FORMSUBMIT_ENDPOINT must keep the placeholder in the repo"; exit 1; }
-          done
+          grep -q 'YOUR_EMAIL@example.com' index.html || { echo "FORMSUBMIT_ENDPOINT must keep the placeholder in the repo"; exit 1; }

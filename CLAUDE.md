@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Two single-file static pages deployed to GitHub Pages: `index.html` is the Northbeam Software landing page (hero, three testimonials, enquiry form, designed with the `ui-ux-pro-max` skill), and `kanban/index.html` is the IT PMO Kanban board for a fictitious bank. Each has inline `<style>`, markup, and `<script>`. There is no build, package manager, linter, or test suite. Run either by opening it directly in a browser (file://); verify changes manually in the browser. Everything below the "Hard constraints" heading describes the Kanban board (`kanban/index.html`); the landing page follows the same no-storage, no-external-resources, `escapeHtml()` rules.
+A single-file IT PMO Kanban board for a fictitious bank, themed as an 8-bit platformer ("PMO Quest"), deployed to GitHub Pages: everything lives in `index.html` (inline `<style>`, markup, and `<script>`). There is no build, package manager, linter, or test suite. Run it by opening `index.html` directly in a browser (file://); verify changes in the browser (Playwright works well: the game exposes `window.__stage` for tests). The theme comes from the `ui-ux-pro-max` skill's Pixel Art style; art is original (no Nintendo characters or assets).
 
 ## Hard constraints (from the original spec)
 
@@ -25,3 +25,5 @@ The `<script>` is organised in commented sections: CONFIG, STATE, HELPERS, SEED,
 - **FormSubmit:** `FORMSUBMIT_ENDPOINT` (top of the script, line ~413) is the one place the notification email address goes. It needs one-time activation: the first submission triggers a confirmation email to that address. Until the placeholder is replaced and activated, the warning toast is expected.
 - **Seed data:** `seedTasks()` computes dates relative to today via `isoDate(offset)`, so some tasks are always overdue. `state.counter` continues from the seeds, so the first new ID is `UOB-ITPM-0009`.
 - **Layout:** four-column grid on desktop, two columns between 768px and ~1100px, stacked below 768px.
+- **Playable stage (`setupStage()` IIFE at the end of the script):** a Play button starts a keyboard-driven runner (walk/sprint with acceleration and friction, variable-height jump). Bricks and the four "!" blocks are entries in a `solids` list used for AABB collision (y measured up from the ground). Bumping a "!" block from below calls `openForm(status)` for that column. Keys are only captured while playing and the stage is focused (never hijack typing or Tab); Esc stops. The "!" blocks are real buttons so every action also works without playing. Keep the world responsive: fewer/lower bricks when the stage is under 700px wide.
+- **Dialog:** `handleSubmit()` adds the card optimistically, then closes the dialog in `finally` after the (8s-timeout) FormSubmit call settles.
