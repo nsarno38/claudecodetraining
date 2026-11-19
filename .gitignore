@@ -1,0 +1,12 @@
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+id_rsa*
+secrets*
+credentials*
+node_modules/
+.DS_Store
+Thumbs.db
+.claude/settings.local.json
